@@ -32,10 +32,16 @@
 </header>
 <section>
     <h2>Select author:</h2>
-    <form th:method="POST">
-        <th:block th:each="author : ${authorsList}">
+    <form th:method="post">
+        <th:block th:each="author : ${authors}">
             <input type="radio" name="authorId" th:value="${author.getId()}">
             <label th:text="${author.getName()} + ' ' + ${author.getSurname()}"></label><br>
+            <th:block>
+                <a th:href="@{'/authors/add-form/{authorId}' (authorId=${author.getId()})}"
+                   class="btn btn-sm btn-info edit-product">
+                    <i class="fa fa-trash">Edit</i>
+                </a>
+            </th:block>
         </th:block>
         <input type='submit' value='Add author'>
     </form>

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,13 +19,14 @@ public class Book {
 
     private BookStore bookStore;
 
-    public Book(String isbn, String title, String genre, int year, List<Author> authors) {
+    public Book(String isbn, String title, String genre, int year,BookStore bookStore) {
         this.id=(long)(Math.random()*1000);
         this.isbn = isbn;
         this.title = title;
         this.genre = genre;
         this.year = year;
-        this.authors = authors;
+        this.authors = new ArrayList<>();
+        this.bookStore=bookStore;
     }
 
     public String getIsbn() {
@@ -51,4 +53,24 @@ public class Book {
         this.authors.add(a);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public BookStore getBookStore() {
+        return bookStore;
+    }
+
+    public String authorsToString(){
+        if(authors.size()>0) {
+            StringBuilder sb = new StringBuilder();
+            for (Author a : authors) {
+                sb.append(a).append(", ");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            return sb.toString();
+        }else{
+            return "";
+        }
+    }
 }
